@@ -1,0 +1,62 @@
+﻿
+
+ALTER TABLE [dbo].[AssociatesMasters] DROP CONSTRAINT [FK_AssociatesMasters_SpecializationMasters_SpecializationId]
+GO
+
+/****** Object:  Table [dbo].[AssociatesMasters]    Script Date: 21-08-2021 12:43:06 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AssociatesMasters]') AND type in (N'U'))
+DROP TABLE [dbo].[AssociatesMasters]
+GO
+
+/****** Object:  Table [dbo].[AssociatesMasters]    Script Date: 21-08-2021 12:43:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AssociatesMasters](
+	[AssociateId] [int] IDENTITY(1,1) NOT NULL,
+	[AssociateName] [nvarchar](100) NULL,
+	[Phone] [nvarchar](20) NULL,
+	[Address] [nvarchar](200) NULL,
+	[SpecializationId] [int] NOT NULL,
+ CONSTRAINT [PK_AssociatesMasters] PRIMARY KEY CLUSTERED 
+(
+	[AssociateId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[AssociatesMasters]  WITH CHECK ADD  CONSTRAINT [FK_AssociatesMasters_SpecializationMasters_SpecializationId] FOREIGN KEY([SpecializationId])
+REFERENCES [dbo].[SpecializationMasters] ([SpecializationId])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[AssociatesMasters] CHECK CONSTRAINT [FK_AssociatesMasters_SpecializationMasters_SpecializationId]
+GO
+
+
+/****** Object:  Table [dbo].[SpecializationMasters]    Script Date: 21-08-2021 16:38:45 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SpecializationMasters]') AND type in (N'U'))
+DROP TABLE [dbo].[SpecializationMasters]
+GO
+
+/****** Object:  Table [dbo].[SpecializationMasters]    Script Date: 21-08-2021 16:38:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SpecializationMasters](
+	[SpecializationId] [int] IDENTITY(1,1) NOT NULL,
+	[SpecializationName] [varchar](250) NULL,
+ CONSTRAINT [PK_SpecializationMasters] PRIMARY KEY CLUSTERED 
+(
+	[SpecializationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
